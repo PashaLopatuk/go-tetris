@@ -37,7 +37,6 @@ func Create() *Game {
 }
 
 var CurrentActionChan = make(chan *Action)
-var IsRotatingStore = false
 
 func (g *Game) Start() {
 	ctx, cancel := context.WithCancel(context.Background())
@@ -51,9 +50,6 @@ func (g *Game) Start() {
 		defer ticker.Stop()
 
 		for {
-			// if IsRotatingStore {
-			// 	continue
-			// }
 			select {
 			case <-ticker.C:
 				g.UpdatePhysics()
@@ -142,7 +138,6 @@ func (g *Game) HandleInput(a Action) {
 	case MOVE_DOWN:
 		g.MoveCurrentPiece(0, 1)
 	case ROTATE:
-		IsRotatingStore = true
 		g.HandleRotate()
 	}
 }
@@ -189,7 +184,7 @@ func (g *Game) MoveCurrentPiece(dx, dy int) {
 			boardY := g.currentPiece.Y + py
 
 			if boardY >= 0 && boardY < len(g.board.grid) &&
-				boardX >= 0 && boardX < len(g.board.grid[boardY]) {
+				boardX >= 0 && boardX < len(g.board.AtRow(boardY)) {
 				g.board.At(boardX, boardY).Fill(g.currentPiece)
 			}
 		}

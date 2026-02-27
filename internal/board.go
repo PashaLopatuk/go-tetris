@@ -36,9 +36,6 @@ func (b *Board) IsValidPosition(piece *Tetromino, dx, dy int) bool {
 			boardX := x + px + dx
 			boardY := y + py + dy
 
-			// fmt.Printf("boardX %d\n", boardX)
-			// fmt.Printf("boardY %d\n", boardY)
-
 			if boardX < 0 || boardX >= len(b.grid[0]) {
 				return false
 			}
@@ -46,11 +43,11 @@ func (b *Board) IsValidPosition(piece *Tetromino, dx, dy int) bool {
 				return false
 			}
 
-			if !piece.Shape[py][px] || b.grid[boardY][boardX].Tetromino == piece {
+			if !piece.Shape[py][px] || b.At(boardX, boardY).Tetromino == piece {
 				continue
 			}
 
-			if b.grid[boardY][boardX].IsFilled {
+			if b.At(boardX, boardY).IsFilled {
 				return false
 			}
 		}

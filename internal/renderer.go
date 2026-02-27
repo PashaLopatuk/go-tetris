@@ -104,7 +104,7 @@ func CreateRectangle(params CreateRectParams) *canvas.Rectangle {
 	if params.Color != nil {
 		rectColor = *params.Color
 	}
-	// fmt.Printf("rectColor: %v\n", rectColor)
+
 	rect := canvas.NewRectangle(rectColor)
 	rect.Resize(fyne.NewSize(float32(width), float32(height)))
 	rect.Move(fyne.NewPos(float32(x), float32(y)))
