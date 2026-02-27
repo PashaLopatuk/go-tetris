@@ -51,9 +51,9 @@ func (g *Game) Start() {
 		defer ticker.Stop()
 
 		for {
-			if IsRotatingStore {
-				continue
-			}
+			// if IsRotatingStore {
+			// 	continue
+			// }
 			select {
 			case <-ticker.C:
 				g.UpdatePhysics()
